@@ -26,10 +26,37 @@
                     {{data的key}}
         */
         new Vue({
-            template : '<h1>最近非常火爆的电视剧{{name}}，他的上映日期是{{releaseTime}}</h1>',
+            template : `<h1>最近非常火爆的电视剧{{name}}，他的上映日期是{{releaseTime}}。主角是{{lead.name}}，年龄是{{lead.age}}
+                其他演员包括：{{actors[0].name}}({{actors[0].age}}岁)，{{actors[1].name}}({{actors[1].age}}岁)，{{a.b.c.d.e.name}}
+            </h1>`,
             data : {
                 name : '狂飙',
-                releaseTime : '2023年1月1日'
+                releaseTime : '2023年1月1日',
+                lead : {
+                    name : '高启强',
+                    age : 41
+                },
+                actors : [
+                    {
+                        name : '安欣',
+                        age : 33
+                    },
+                    {
+                        name : '高启兰',
+                        age : 28
+                    }
+                ],
+                a : {
+                    b : {
+                        c : {
+                            d : {
+                                e : {
+                                    name : '呵呵'
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }).$mount("#app")
     </script>
