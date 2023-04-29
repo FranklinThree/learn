@@ -12,7 +12,7 @@ P11 011-模板语法之指令语法
 P12 012-v-bind指令详解
 P13 013-v-model指令详解
 P14 014-初识MVVM分层思想
-P15 015-VSCode快速生成代码片段
+*P15 015-VSCode快速生成代码片段
 P16 016-通过vm可以访问哪些属性
 P17 017-Object的defineProperty方法
 P18 018-数据代理机制的实现
