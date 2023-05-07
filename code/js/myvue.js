@@ -7,14 +7,17 @@ class Vue{
         // 获取所有的属性名
         Object.keys(options.data).forEach((propertyName, index) => {
             // console.log(typeof propertyName, propertyName, index)
-            Object.defineProperty(this, propertyName, {
-                get(){
-                    return options.data[propertyName]
-                },
-                set(value){
-                    options.data[propertyName] = value
-                },
-            })
+            let prefix = propertyName.charAt(0)
+            if(prefix != '_' && prefix != '$'){
+                Object.defineProperty(this, propertyName, {
+                    get(){
+                        return options.data[propertyName]
+                    },
+                    set(value){
+                        options.data[propertyName] = value
+                    },
+                })
+            }
 
         })
     }
