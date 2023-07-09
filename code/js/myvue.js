@@ -13,12 +13,18 @@ class Vue{
                     get(){
                         return options.data[propertyName]
                     },
-                    set(value){
-                        options.data[propertyName] = value
+                    set(val){
+                        options.data[propertyName] = val
                     },
                 })
             }
 
+        })
+        // 获取所有的方法名
+        Object.keys(options.methods).forEach((methodName, index) => {
+            // console.log(methodName);
+            // 给当前的Vue实例拓展一个方法
+            this[methodName] = options.methods[methodName]
         })
     }
 }
