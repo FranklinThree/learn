@@ -84,9 +84,22 @@
                     get(){
                         return this.info.split('').reverse().join('')
                     },
+                    // 当修改计算属性的时候, set方法被自动调用.
                     set(val){
-
+                        // console.log('setter 方法被调用了');
+                        // 不能这么做, 这么做就递归了.
+                        // this.reversedInfo = val
+                        // 怎么修改计算属性呢? 原理: 计算属性的值变还是不变, 取决于计算属性关联的Vue原始属性的值.
+                        // 也就是说: reversedInfo变还是不变, 取决于info属性的值变不变.
+                        // 本质上: 修改计算属性, 实际上就是通过修改Vue的原始属性来实现的.
+                        this.info = val.split('').reverse().join('')
                     }
+                },
+
+                // 简写形式: set不需要的时候.
+                reversedInfo2(){
+                        return this.info.split('').reverse().join('')
+
                 }
             },
         })
