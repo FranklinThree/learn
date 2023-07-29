@@ -11,13 +11,20 @@
     <div id="app">
         <h1>{{msg}}</h1>
         数字: <input type="text" v-model="number">
+        数字: <input type="text" v-model="a.b">
+        数字: <input type="text" v-model="a.c">
+
     </div>
     <script>
         const vm = new Vue({
             el : '#app',
             data : {
                 msg : '侦听属性的变化',
-                number : 0
+                number : 0,
+                a : {
+                    b : 0,
+                    c : 0
+                }
             },
             computed : {
                 hehe(){
@@ -38,6 +45,9 @@
                     // oldValue是属性值改变之前的旧值.
                     handler(newValue, oldValue){
                         console.log(newValue, oldValue);
+                        // this是当前的Vue实例.
+                        // 如果该函数是箭头函数, 这个this是window对象. 不建议使用箭头函数.
+                        console.log(this);
                     }
                 },
                 // 也可以监视计算属性
@@ -45,7 +55,44 @@
                     handler(a, b){
                         console.log(a, b);
                     }
-                }
+                },
+                // 无法监视b属性, 因为b属性压根不存在
+                // b : {
+                //     immediate : true,
+
+                //     handler(newValue, oldValue){
+                //         console.log('@');
+                //     }
+                // },
+
+                // 如果监视的属性具有多级结构, 一定要添加单引号: 'a.b'
+                // 'a.b' : {
+                //     immediate : true,
+
+                //     handler(newValue, oldValue){
+                //         console.log('@');
+                //     }
+                // },
+                // 'a.c' : {
+                //     immediate : true,
+
+                //     handler(newValue, oldValue){
+                //         console.log('@');
+                //     }
+                // },
+
+
+                a : {
+                    immediate : true,
+                    // 启用深度监视, 默认是不开启深度监视的.
+                    // 什么时候开启深度监视: 当你需要监视一个具有多级结构的属性, 并且监视所有的属性, 需要启用深度监视.
+                    deep : true,
+
+                    handler(newValue, oldValue){
+                        console.log('@');
+                    }
+                },
+
             }
         })
     </script>
