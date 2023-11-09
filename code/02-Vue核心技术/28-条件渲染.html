@@ -41,6 +41,28 @@
         天气：<span v-if="temprature <= 10">寒冷</span>
         <span v-else-if="temprature <= 25">凉爽</span>
         <span v-else>炎热</span>
+
+        <br><br><br>
+
+        <!-- 
+            v-show指令是通过修改元素的CSS样式的display属性来达到显示和隐藏的。
+            v-if和v-show应该如何选择？
+                1. 如果一个元素在页面上被频繁地隐藏和显示，建议使用v-show，因为此时使用v-if开销比较大。
+                2. v-if的优点：页面加载速度快，提高了页面的渲染效率。
+         -->
+        <div v-show="true">你可以看到我吗</div>
+
+        <!-- <input v-if="counter === 10" type="text">
+        <input v-if="counter === 10" type="checkbox">
+        <input v-if="counter === 10" type="radio"> -->
+
+        <!-- template标签/元素只是起到占位的作用，不会真正的出现在页面上，也不会影响页面的结构。 -->
+        <template v-if="counter === 10">
+            <input type="text">
+            <input type="checkbox">
+            <input type="radio">
+        </template>
+        
     </div>
     <script>
         const vm = new Vue({
