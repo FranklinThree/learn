@@ -48,7 +48,6 @@
                 console.log('beforeCreate')
                 // 调用methods报错了，不存在
                 // this.m()
-                debugger
             },
             // 创建后
             created(){
@@ -66,6 +65,9 @@
             // 挂载后
             mounted(){
                 console.log('mounted')
+                console.log(this.$el)
+                console.log(this.$el instanceof HTMLElement)
+                debugger
             },
             // 3. 更新阶段
             // 更新前
