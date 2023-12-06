@@ -11,6 +11,7 @@
     <div id="app">
         <h1>{{msg}}</h1>
         <h3>计数器：{{counter}}</h3>
+        <h3 v-text="counter"></h3>
         <button @click="add">点我加1</button>
         <button @click="destroy">点我销毁</button>
     </div>
@@ -28,6 +29,11 @@
                 destroy(){
                     this.$destroy()
                 }
+            },
+            watch : {
+                counter(){
+                    console.log('counter被监视一次！')
+                },
             },
             /*
                 1. 初始阶段
@@ -82,10 +88,14 @@
             // 销毁前
             beforeDestroy(){
                 console.log('beforeDestroy')
+                console.log(this)
+                this.counter = 1000
+                debugger
             },
             // 销毁后
             destroyed(){
                 console.log('destroyed')
+                console.log(this)
             }
         })
         
