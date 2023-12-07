@@ -23,14 +23,63 @@
                         }
 
             第三步：使用组件
+
+        小细节：
+            1. 在Vue当中是可以使用自闭合标签的，但是前提必须在脚手架环境中使用。
+            2. 在创建组件的时候Vue.extend()可以省略，但是底层实际上还是会调用的，在注册组件的时候会调用。
+            3. 组件的名字
+                第一种：全部小写
+                第二种：首字母大写，后面都是小写
+                第三种：kebab-case命名法（串式命名法。例如：user-login）
+                第四种：CamelCase命名法（驼峰式命名法。例如：UserLogin），但是这种方式只允许在脚手架环境中使用。
+                不要使用html内置的标签名作为组件名。
+            4. 在创建组件的时候，通过配置项配置一个name，这个name不是组件的名字，是设置Vue开发者工具中显示的组件的名字。
+
     -->
     <div id="app">
         <h1>{{msg}}</h1>
         <userlist></userlist>
+        <userlogin></userlogin>
+    </div>
+
+    <div id="app2">
+        <h2>app2</h2>
+        <userlogin></userlogin>
+        <hello-world></hello-world>
     </div>
     <script>
         // 1.创建组件（结构HTML 交互JS 样式CSS）
-        const myComponent = Vue.extend({
+        // const myComponent = Vue.extend({
+        //     template : `
+        //         <ul>
+        //         <li v-for="(user,index) in users" :key="user.id">
+        //           {{index}},{{user.name}}
+        //         </li>
+        //         </ul>
+        //     `,
+        //     data(){
+        //         return {
+        //             users : [
+        //                 {id:'001',name:'jack'},
+        //                 {id:'002',name:'lucy'},
+        //                 {id:'003',name:'james'},
+        //             ],
+        //         }
+        //     }
+        // })
+
+        const abc = {
+            name : 'abcccc',
+            template : `
+                <h1>测试组件的名字????</h1>
+
+            `,
+        }
+        // Vue.component('helloworld', abc)
+        // Vue.component('Helloworld', abc)
+        Vue.component('hello-world', abc)
+
+        const myComponent = {
             template : `
                 <ul>
                 <li v-for="(user,index) in users" :key="user.id">
@@ -47,7 +96,37 @@
                     ],
                 }
             }
-        })
+        }
+
+        // 1.创建组件
+        const userLoginComponent = {
+            template : `
+                <div>
+                    <h3>用户登录</h3>
+                    <form @submit.prevent="login">
+                        账号：<input type="text" v-model="username"> <br><br>
+                        密码：<input type="password" v-model="password"> <br><br>
+                        <button>登录</button>
+                    </form>
+                </div>
+            `,
+            data(){
+                return {
+                    username : '',
+                    password : '',
+                }
+
+            },
+            methods: {
+                login(){
+                    alert(this.username + "," + this.password)
+                }
+            }
+        }
+
+
+        // 全局注册
+        Vue.component('userlogin', userLoginComponent)
 
         // Vue实例
         const vm = new Vue({
@@ -59,8 +138,15 @@
             // 2. 注册组件
             components : {
                 // userlist是组件的名字。myComponent只是一个变量名而已。
-                userlist : myComponent
+                userlist : myComponent,
+                // userlogin : userLoginComponent
             }
+        })
+
+
+
+        const vm2 = new Vue({
+            el: '#app2',
         })
 
         // let data = {
