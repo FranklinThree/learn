@@ -25,7 +25,7 @@ export default {
 </script>
 
 <template>
-  <div>
+  <div class="s">
     <h1>{{ msg }}</h1>
     <h3>姓名：{{ name }}</h3>
     <h3>年龄：{{ age }}</h3>
@@ -35,5 +35,7 @@ export default {
 </template>
 
 <style scoped>
-
+  .s {
+    background-color: bisque;
+  }
 </style>
