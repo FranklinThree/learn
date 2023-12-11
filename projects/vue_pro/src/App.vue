@@ -8,18 +8,32 @@ export default {
       msg : '汽车信息'
     }
   },
+  methods:{
+    printCarInfo(){
+      // 获取子组件
+      console.log(this.$refs.car1)
+      console.log(this.$refs.car2)
+
+      console.log(this.$refs.car1.price)
+      console.log(this.$refs.car1.color)
+      console.log(this.$refs.car1.brand)
+
+      console.log(this.$refs.hehe.innerText)
+    }
+  },
   components: {Car}
 }
 </script>
 
 <template>
   <div>
-    <h1>{{msg}}</h1>
+    <h1 ref="hehe">{{msg}}</h1>
 <!--    在App这个父组件当中，找到子组件Car，然后给Car这个子组件传数据：通过属性的形式传数据-->
-    <Car brand="宝马520" color="黑色" v-bind:price="10"></Car>
+    <Car brand="宝马520" color="黑色" :price="10" ref="car1"></Car>
     <hr>
-    <Car brand="比亚迪汉" color="白色" v-bind:price="20"></Car>
-
+    <Car brand="比亚迪汉" color="白色" v-bind:price="20" ref="car2"></Car>
+    <hr>
+    <button @click="printCarInfo">打印车辆信息</button>
 
   </div>
 </template>
