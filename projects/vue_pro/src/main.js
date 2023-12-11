@@ -9,6 +9,13 @@ Vue.mixin(mix1)
 Vue.mixin(mix2)
 Vue.mixin(mix3)
 
+// 导入插件
+import {p1} from '@/plugins'
+
+// 插件的使用通常放在Vue实例之前
+// 插上插件。（删除就是拔下插件）
+Vue.use(p1,1,2,3,4)
+
 // 关闭生产提示信息
 Vue.config.productionTip = false
 
