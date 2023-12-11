@@ -3,6 +3,12 @@ import Vue from 'vue'
 // 导入App组件（根组件）
 import App from './App.vue'
 
+// 全局混入
+import {mix1, mix2, mix3} from '@/mixin'
+Vue.mixin(mix1)
+Vue.mixin(mix2)
+Vue.mixin(mix3)
+
 // 关闭生产提示信息
 Vue.config.productionTip = false
 
