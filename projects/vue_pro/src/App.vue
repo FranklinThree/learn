@@ -10,14 +10,29 @@ export default {
     BugHeader,
     BugList,
     BugFooter,
+  },
+  data() {
+    return {
+      bugList: [
+        {id: '001', desc: 'BUG描述信息1', resolved: false},
+        {id: '002', desc: 'BUG描述信息2', resolved: true},
+        {id: '003', desc: 'BUG描述信息3', resolved: false},
+      ]
+    }
+  },
+  methods: {
+    // 保存bug对象的回调方法
+    saveBugCallback(bug){
+        this.bugList.unshift(bug)
+    }
   }
 }
 </script>
 
 <template>
   <div>
-    <bug-header></bug-header>
-    <bug-list></bug-list>
+    <bug-header :saveBugCallback="saveBugCallback"></bug-header>
+    <bug-list :bugList="bugList"></bug-list>
     <bug-footer></bug-footer>
   </div>
 </template>

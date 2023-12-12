@@ -4,15 +4,9 @@ import BugItem from "@/components/BugItem.vue";
 export default {
   name: "BugList",
   components: {BugItem},
-  data() {
-    return {
-      bugList: [
-        {id: '001', desc: 'BUG描述信息1', resolved: false},
-        {id: '002', desc: 'BUG描述信息2', resolved: true},
-        {id: '003', desc: 'BUG描述信息3', resolved: false},
-      ]
-    }
-  }
+  props: [
+      'bugList',
+  ]
 }
 </script>
 
