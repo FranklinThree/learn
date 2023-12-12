@@ -3,7 +3,16 @@ import BugItem from "@/components/BugItem.vue";
 
 export default {
   name: "BugList",
-  components: {BugItem}
+  components: {BugItem},
+  data() {
+    return {
+      bugList: [
+        {id: '001', desc: 'BUG描述信息1', resolved: false},
+        {id: '002', desc: 'BUG描述信息2', resolved: true},
+        {id: '003', desc: 'BUG描述信息3', resolved: false},
+      ]
+    }
+  }
 }
 </script>
 
@@ -18,7 +27,9 @@ export default {
       </tr>
       </thead>
       <tbody>
-        <bug-item></bug-item>
+        <bug-item v-for="bug of bugList" :key="bug.id" :bug="bug">
+
+        </bug-item>
       </tbody>
     </table>
   </div>

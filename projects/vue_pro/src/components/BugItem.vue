@@ -1,13 +1,16 @@
 <script>
 export default {
-  name: "BugItem"
+  name: "BugItem",
+  props: [
+    'bug',
+  ]
 }
 </script>
 
 <template>
   <tr>
-    <td><input type="checkbox" checked="true"></td>
-    <td>xxxxxx</td>
+    <td><input type="checkbox" :checked="bug.resolved"></td>
+    <td>{{bug.desc}}</td>
     <td><button class="small red button">删除</button></td>
   </tr>
 </template>
