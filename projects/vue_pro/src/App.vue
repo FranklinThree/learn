@@ -32,6 +32,13 @@ export default {
           bug.resolved = !bug.resolved
         }
       })
+    },
+    // 删除数组中的某个bug对象：根据id删除
+    deleteByIdCallback(bugId){
+      // 注意：filter方法返回的是一个全新的数组。
+      this.bugList = this.bugList.filter((bug)=>{
+        return bug.id !== bugId
+      })
     }
   }
 }
@@ -40,7 +47,7 @@ export default {
 <template>
   <div>
     <bug-header :saveBugCallback="saveBugCallback"></bug-header>
-    <bug-list :bugList="bugList" :modifyResolvedCallback="modifyResolvedCallback"></bug-list>
+    <bug-list :bugList="bugList" :modifyResolvedCallback="modifyResolvedCallback" :deleteByIdCallback="deleteByIdCallback"></bug-list>
     <bug-footer></bug-footer>
   </div>
 </template>

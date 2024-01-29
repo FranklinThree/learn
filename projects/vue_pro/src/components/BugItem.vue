@@ -3,11 +3,15 @@ export default {
   name: "BugItem",
   props: [
     'bug',
-    'modifyResolvedCallback'
+    'modifyResolvedCallback',
+    'deleteByIdCallback'
   ],
   methods: {
     modifyResolved(bugId){
       this.modifyResolvedCallback(bugId)
+    },
+    deleteById(bugId){
+      this.deleteByIdCallback(bugId)
     }
   }
 }
@@ -22,7 +26,7 @@ export default {
 
 
     <td>{{bug.desc}}</td>
-    <td><button class="small red button">删除</button></td>
+    <td><button class="small red button" @click="deleteById(bug.id)">删除</button></td>
   </tr>
 </template>
 
