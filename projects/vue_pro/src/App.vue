@@ -48,7 +48,7 @@ export default {
   <div>
     <bug-header :saveBugCallback="saveBugCallback"></bug-header>
     <bug-list :bugList="bugList" :modifyResolvedCallback="modifyResolvedCallback" :deleteByIdCallback="deleteByIdCallback"></bug-list>
-    <bug-footer></bug-footer>
+    <bug-footer :bugList="bugList"></bug-footer>
   </div>
 </template>
 
