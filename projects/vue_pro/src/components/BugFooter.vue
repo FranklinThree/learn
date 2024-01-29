@@ -36,7 +36,7 @@ export default {
 </script>
 
 <template>
-  <div class="footer">
+  <div class="footer" v-show="bugList.length">
     <button class="small red button">清除已解决</button>
     <span>当前BUG总量{{bugList.length}}个，已解决{{resolvedCount}}个</span>
   </div>
