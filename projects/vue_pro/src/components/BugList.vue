@@ -7,7 +7,8 @@ export default {
   props: [
       'bugList',
       'modifyResolvedCallback',
-      'deleteByIdCallback'
+      'deleteByIdCallback',
+      'selectAllCallback'
   ],
   computed:{
     resolvedCount(){
@@ -30,9 +31,24 @@ export default {
       return count
 
     },
-    isAll(){
-      return this.bugList.length == this.resolvedCount && this.bugList.length > 0
+    // isAll(){
+    //   return this.bugList.length == this.resolvedCount && this.bugList.length > 0
+    // }
+    isAll: {
+      get(){
+        return this.bugList.length == this.resolvedCount && this.bugList.length > 0
+      },
+      set(value){
+        this.selectAllCallback(value)
+      }
     }
+  },
+  methods:{
+    selectAll(e){
+      this.selectAllCallback(e.target.checked)
+      // console.log(e.target.checked)
+    },
+    
   }
 }
 </script>
@@ -42,7 +58,9 @@ export default {
     <table>
       <thead>
       <tr>
-        <th class="c1">全选 <input type="checkbox" :checked="isAll"></th>
+        <!-- <th class="c1">全选 <input type="checkbox" :checked="isAll" @change="selectAll"></th> -->
+        <th class="c1">全选 <input type="checkbox" v-model="isAll"></th>
+
         <th>bug描述</th>
         <th class="c2">操作</th>
       </tr>

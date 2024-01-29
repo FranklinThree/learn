@@ -39,6 +39,12 @@ export default {
       this.bugList = this.bugList.filter((bug)=>{
         return bug.id !== bugId
       })
+    },
+    // 全选或者取消全选
+    selectAllCallback(flag){
+      this.bugList.forEach((bug)=>{
+        bug.resolved = flag
+      })
     }
   }
 }
@@ -47,7 +53,7 @@ export default {
 <template>
   <div>
     <bug-header :saveBugCallback="saveBugCallback"></bug-header>
-    <bug-list :bugList="bugList" :modifyResolvedCallback="modifyResolvedCallback" :deleteByIdCallback="deleteByIdCallback"></bug-list>
+    <bug-list :bugList="bugList" :modifyResolvedCallback="modifyResolvedCallback" :deleteByIdCallback="deleteByIdCallback" :selectAllCallback="selectAllCallback"></bug-list>
     <bug-footer :bugList="bugList"></bug-footer>
   </div>
 </template>
