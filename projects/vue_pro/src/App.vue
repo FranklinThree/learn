@@ -24,6 +24,14 @@ export default {
     // 保存bug对象的回调方法
     saveBugCallback(bug){
         this.bugList.unshift(bug)
+    },
+    // 修改某个bug对象的resolved值
+    modifyResolvedCallback(bugId){
+      this.bugList.forEach((bug)=>{
+        if(bug.id === bugId){
+          bug.resolved = !bug.resolved
+        }
+      })
     }
   }
 }
@@ -32,7 +40,7 @@ export default {
 <template>
   <div>
     <bug-header :saveBugCallback="saveBugCallback"></bug-header>
-    <bug-list :bugList="bugList"></bug-list>
+    <bug-list :bugList="bugList" :modifyResolvedCallback="modifyResolvedCallback"></bug-list>
     <bug-footer></bug-footer>
   </div>
 </template>

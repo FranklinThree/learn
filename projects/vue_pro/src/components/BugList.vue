@@ -6,6 +6,7 @@ export default {
   components: {BugItem},
   props: [
       'bugList',
+      'modifyResolvedCallback'
   ]
 }
 </script>
@@ -21,7 +22,7 @@ export default {
       </tr>
       </thead>
       <tbody>
-        <bug-item v-for="bug of bugList" :key="bug.id" :bug="bug">
+        <bug-item v-for="bug of bugList" :key="bug.id" :bug="bug" :modifyResolvedCallback="modifyResolvedCallback">
 
         </bug-item>
       </tbody>
