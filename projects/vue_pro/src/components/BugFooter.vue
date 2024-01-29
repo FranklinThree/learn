@@ -7,7 +7,8 @@ export default {
     BugItem
   },
   props:[
-    'bugList'
+    'bugList',
+    'clearResolvedCallback'
   ],
   computed:{
     resolvedCount(){
@@ -30,6 +31,11 @@ export default {
       return count
 
     }
+  },
+  methods:{
+    clearResolved(){
+      this.clearResolvedCallback()
+    }
   }
   
 }
@@ -37,7 +43,7 @@ export default {
 
 <template>
   <div class="footer" v-show="bugList.length">
-    <button class="small red button">清除已解决</button>
+    <button class="small red button" @click="clearResolved">清除已解决</button>
     <span>当前BUG总量{{bugList.length}}个，已解决{{resolvedCount}}个</span>
   </div>
 </template>

@@ -45,6 +45,12 @@ export default {
       this.bugList.forEach((bug)=>{
         bug.resolved = flag
       })
+    },
+    // 清空已解决
+    clearResolvedCallback(){
+      this.bugList = this.bugList.filter((bug)=>{
+        return !bug.resolved
+      })
     }
   }
 }
@@ -54,7 +60,7 @@ export default {
   <div>
     <bug-header :saveBugCallback="saveBugCallback"></bug-header>
     <bug-list :bugList="bugList" :modifyResolvedCallback="modifyResolvedCallback" :deleteByIdCallback="deleteByIdCallback" :selectAllCallback="selectAllCallback"></bug-list>
-    <bug-footer :bugList="bugList"></bug-footer>
+    <bug-footer :bugList="bugList" :clearResolvedCallback="clearResolvedCallback"></bug-footer>
   </div>
 </template>
 
