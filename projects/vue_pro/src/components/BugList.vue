@@ -8,7 +8,8 @@ export default {
       'bugList',
       'modifyResolvedCallback',
       'deleteByIdCallback',
-      'selectAllCallback'
+      'selectAllCallback',
+      'updateDescCallback'
   ],
   computed:{
     resolvedCount(){
@@ -66,7 +67,7 @@ export default {
       </tr>
       </thead>
       <tbody>
-        <bug-item v-for="bug of bugList" :key="bug.id" :bug="bug" :modifyResolvedCallback="modifyResolvedCallback" :deleteByIdCallback="deleteByIdCallback">
+        <bug-item v-for="bug of bugList" :key="bug.id" :bug="bug" :modifyResolvedCallback="modifyResolvedCallback" :deleteByIdCallback="deleteByIdCallback" :updateDescCallback="updateDescCallback">
 
         </bug-item>
       </tbody>
