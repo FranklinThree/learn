@@ -5,6 +5,13 @@ export default {
   components: {
     User,
   },
+  mounted(){
+    // 给ref="user"的组件绑定event1事件，并且给event1事件绑定一个回调函数：doSome
+    // this.$refs.user.$on('event1', this.doSome)
+    // 保证事件只触发一次
+    this.$refs.user.$once('event1', this.doSome)
+
+  },
   methods:{
     hello(){
       console.log('hello vue!')
@@ -61,6 +68,8 @@ export default {
 
     <User @event1.once="doSome"></User>
 
+    <!-- 准备一个组件 -->
+    <User ref="user"></User>
   </div>
 </template>
 
