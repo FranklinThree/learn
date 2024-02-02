@@ -7,7 +7,18 @@ export default {
   },
   mounted(){
     // 给ref="user"的组件绑定event1事件，并且给event1事件绑定一个回调函数：doSome
-    this.$refs.user.$on('event1', this.doSome)
+    // this.$refs.user.$on('event1', this.doSome)
+
+    // 如果回调函数是普通函数：函数体当中的this是User组件实例，不是App组件实例。
+    // this.$refs.user.$on('event1', function(){
+    //   console.log(this)
+    // })
+
+    // 如果回调函数是箭头函数：那么函数体当中的this就是App组件实例。
+    this.$refs.user.$on('event1', ()=>{
+      console.log(this)
+    })
+
     this.$refs.user.$on('event1', this.doOther)
 
     // 保证事件只触发一次
@@ -24,6 +35,7 @@ export default {
     // ES6的语法, ...params这个params可以看做是一个数组。以数组的形式接收多个参数。
     doSome(name, ...params){
       console.log(name, params)
+      // console.log(this)
     },
     doOther(){
       console.log('Do Other!')
