@@ -7,9 +7,11 @@ export default {
   },
   mounted(){
     // 给ref="user"的组件绑定event1事件，并且给event1事件绑定一个回调函数：doSome
-    // this.$refs.user.$on('event1', this.doSome)
+    this.$refs.user.$on('event1', this.doSome)
+    this.$refs.user.$on('event1', this.doOther)
+
     // 保证事件只触发一次
-    this.$refs.user.$once('event1', this.doSome)
+    // this.$refs.user.$once('event1', this.doSome)
 
   },
   methods:{
@@ -22,6 +24,9 @@ export default {
     // ES6的语法, ...params这个params可以看做是一个数组。以数组的形式接收多个参数。
     doSome(name, ...params){
       console.log(name, params)
+    },
+    doOther(){
+      console.log('Do Other!')
     }
   }
 
@@ -64,12 +69,14 @@ export default {
     <button @click="hello">内置事件的实现步骤</button>
 
     <!-- 给User组件绑定一个自定义的事件 -->
-    <User v-on:event1="doSome"></User>
+    <User v-on:event1="doSome" @event2="doOther"></User>
 
-    <User @event1.once="doSome"></User>
+    <!-- <User @event1.once="doSome"></User> -->
+    <User @event1="doSome" @event2="doOther"></User>
+
 
     <!-- 准备一个组件 -->
-    <User ref="user"></User>
+    <User ref="user" ></User>
   </div>
 </template>
 
