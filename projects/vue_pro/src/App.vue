@@ -1,210 +1,69 @@
 <script>
-
-import BugHeader from "@/components/BugHeader.vue";
-import BugFooter from "@/components/BugFooter.vue";
-import BugList from "@/components/BugList.vue";
-
+import User from '@/components/User.vue'
 export default {
   name: "App",
   components: {
-    BugHeader,
-    BugList,
-    BugFooter,
+    User,
   },
-  data() {
-    return {
-      bugList: [
-        {id: '001', desc: 'BUG描述信息1', resolved: false},
-        {id: '002', desc: 'BUG描述信息2', resolved: true},
-        {id: '003', desc: 'BUG描述信息3', resolved: false},
-      ]
-    }
-  },
-  methods: {
-    // 保存bug对象的回调方法
-    saveBugCallback(bug){
-        this.bugList.unshift(bug)
+  methods:{
+    hello(){
+      console.log('hello vue!')
     },
-    // 修改某个bug对象的resolved值
-    modifyResolvedCallback(bugId){
-      this.bugList.forEach((bug)=>{
-        if(bug.id === bugId){
-          bug.resolved = !bug.resolved
-        }
-      })
-    },
-    // 删除数组中的某个bug对象：根据id删除
-    deleteByIdCallback(bugId){
-      // 注意：filter方法返回的是一个全新的数组。
-      this.bugList = this.bugList.filter((bug)=>{
-        return bug.id !== bugId
-      })
-    },
-    // 全选或者取消全选
-    selectAllCallback(flag){
-      this.bugList.forEach((bug)=>{
-        bug.resolved = flag
-      })
-    },
-    // 清空已解决
-    clearResolvedCallback(){
-      this.bugList = this.bugList.filter((bug)=>{
-        return !bug.resolved
-      })
-    },
-    // 更新信息
-    updateDescCallback(bugId, newDesc){
-      this.bugList.forEach((bug)=>{
-        if(bug.id === bugId){
-          bug.desc = newDesc
-        }
-      })
+    // doSome(name, age, gender){
+    //   console.log(name, age, gender)
+    // }
+    // ES6的语法, ...params这个params可以看做是一个数组。以数组的形式接收多个参数。
+    doSome(name, ...params){
+      console.log(name, params)
     }
   }
+
 }
 </script>
 
 <template>
   <div>
-    <bug-header :saveBugCallback="saveBugCallback"></bug-header>
-    <bug-list :bugList="bugList" :modifyResolvedCallback="modifyResolvedCallback" :deleteByIdCallback="deleteByIdCallback" :selectAllCallback="selectAllCallback" :updateDescCallback="updateDescCallback"></bug-list>
-    <bug-footer :bugList="bugList" :clearResolvedCallback="clearResolvedCallback"></bug-footer>
+    <!-- 
+      1. 关于内置事件的实现步骤。
+        第一步：提供事件源（以下这个按钮就是一个事件源）
+        第二步：给事件源绑定事件
+          v-on:事件名 或者 @事件名
+        第三步：编写回调函数，将回调函数和事件进行绑定
+        第四步：等待事件的触发，只要事件触发，则执行回调函数。
+      2.关于组件的自定义事件，实现步骤
+        第一步：提供事件源（事件源是一个组件）
+        第二步：给组件绑定事件
+          v-on:事件名 或者 @事件名
+        第三步：编写回调函数，将回调函数和事件进行绑定
+        第四步：等待事件的触发，只要事件触发，则执行回调函数。
+          对于组件自定义事件来说，要想让事件发生，需要去执行一段代码。
+          这段代码负责去触发这个事件，让这个事件发生。
+          这段代码在哪里写？
+            事件绑定在A组件上，则触发这个事件的代码要在A组件当中编写。
+
+      3.总结：到目前为止，父子组件之间如何通信（传递变量）
+        父=>子:
+          props
+        子=>父:
+          第一种方式：在父中定义一个方法，将方法传递给子，然后在子中调用父传过来的方法，这样给父传数据。（这种方式以后很少使用）
+          第二种方式：使用组件的自定义事件的方式，也可以完成子向父传数据。
+            App组件是父组件
+            User组件是子组件
+            子组件向父组件传数据（User给App组件传数据）：
+              在父组件当中绑定事件。
+              在子组件当中触发事件。
+            父绑定，子触发（记住###）
+     -->
+    <button @click="hello">内置事件的实现步骤</button>
+
+    <!-- 给User组件绑定一个自定义的事件 -->
+    <User v-on:event1="doSome"></User>
+
+    <User @event1.once="doSome"></User>
+
   </div>
 </template>
 
 <style>
-/* 共享 */
-.button{
-  display: inline-block;
-  *display: inline;
-  zoom: 1;
-  padding: 6px 20px;
-  margin: 0;
-  cursor: pointer;
-  border: 1px solid #bbb;
-  overflow: visible;
-  font: bold 13px arial, helvetica, sans-serif;
-  text-decoration: none;
-  white-space: nowrap;
-  color: #555;
-  background-color: #ddd;
-  //background-image: -webkit-gradient(linear, to right top, to right bottom, from(rgba(255,255,255,1)), to(rgba(255,255,255,0)));
-  background-image: linear-gradient(to right bottom, rgba(255,255,255,1), rgba(255,255,255,0));
 
-  background-image: -webkit-linear-gradient(to bottom, rgba(255,255,255,1), rgba(255,255,255,0));
-  background-image: -moz-linear-gradient(to bottom, rgba(255,255,255,1), rgba(255,255,255,0));
-  background-image: -ms-linear-gradient(to bottom, rgba(255,255,255,1), rgba(255,255,255,0));
-  background-image: -o-linear-gradient(to bottom, rgba(255,255,255,1), rgba(255,255,255,0));
-  background-image: linear-gradient(to bottom, rgba(255,255,255,1), rgba(255,255,255,0));
-  -webkit-transition: background-color .2s ease-out;
-  -moz-transition: background-color .2s ease-out;
-  -ms-transition: background-color .2s ease-out;
-  -o-transition: background-color .2s ease-out;
-  transition: background-color .2s ease-out;
-  background-clip: padding-box; /* Fix bleeding */
-  -moz-border-radius: 3px;
-  -webkit-border-radius: 3px;
-  border-radius: 3px;
-  -moz-box-shadow: 0 1px 0 rgba(0, 0, 0, .3), 0 2px 2px -1px rgba(0, 0, 0, .5), 0 1px 0 rgba(255, 255, 255, .3) inset;
-  -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, .3), 0 2px 2px -1px rgba(0, 0, 0, .5), 0 1px 0 rgba(255, 255, 255, .3) inset;
-  box-shadow: 0 1px 0 rgba(0, 0, 0, .3), 0 2px 2px -1px rgba(0, 0, 0, .5), 0 1px 0 rgba(255, 255, 255, .3) inset;
-  text-shadow: 0 1px 0 rgba(255,255,255, .9);
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-.button:active{
-  background: #e9e9e9;
-  position: relative;
-  top: 1px;
-  text-shadow: none;
-  -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, .3) inset;
-  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .3) inset;
-  box-shadow: 0 1px 1px rgba(0, 0, 0, .3) inset;
-}
-.button.red{
-  color: #fff;
-  text-shadow: 0 1px 0 rgba(0,0,0,.2);
-  //background-image: -webkit-gradient(linear, to right top, to right bottom, from(rgba(255,255,255,.3)), to(rgba(255,255,255,0)));
-  background-image: linear-gradient(to right bottom, rgba(255,255,255,.3), rgba(255,255,255,0));
-
-  background-image: -webkit-linear-gradient(to bottom, rgba(255,255,255,.3), rgba(255,255,255,0));
-  background-image: -moz-linear-gradient(to bottom, rgba(255,255,255,.3), rgba(255,255,255,0));
-  background-image: -ms-linear-gradient(to bottom, rgba(255,255,255,.3), rgba(255,255,255,0));
-  background-image: -o-linear-gradient(to bottom, rgba(255,255,255,.3), rgba(255,255,255,0));
-  background-image: linear-gradient(to bottom, rgba(255,255,255,.3), rgba(255,255,255,0));
-}
-.button.red{
-  background-color: #ca3535;
-  border-color: #c43c35;
-}
-.button.red:hover{
-  background-color: #ee5f5b;
-}
-.button.red:active{
-  background: #c43c35;
-}
-.button.green{
-  background-color: #57a957;
-  border-color: #57a957;
-}
-.button.green:hover{
-  background-color: #62c462;
-}
-.button.green:active{
-  background: #57a957;
-}
-
-/* header */
-.header {
-  margin-bottom: 20px;
-  margin-top: 20px;
-}
-/* list */
-table{
-  width: 40%;
-  border-collapse: collapse;
-}
-table caption{
-  font-size: 1em;
-  font-weight: bold;
-  margin: 1em 0;
-}
-.c1,.c2{
-  width: 100px;
-}
-th {
-  border: 1px solid #999;
-  text-align: center;
-  padding: 5px 0;
-}
-table thead tr{
-  background-color: #008c8c;
-  color: #fff;
-}
-/* item */
-table tbody tr:nth-child(odd){
-  background-color: #eee;
-}
-table tbody tr:hover{
-  background-color: #ccc;
-}
-table tbody tr td:first-child{
-  color: #f40;
-}
-td{
-  border: 1px solid #999;
-  text-align: center;
-  padding: 5px 0;
-}
-/* footer */
-.footer{
-  margin-top: 10px;
-}
-.footer span{
-  font-size: 12px;
-}
 </style>
