@@ -6,6 +6,9 @@ export default {
     User,
   },
   mounted(){
+    // 绑定事件
+    this.$bus.$on('eventx', this.test)
+
     // 给ref="user"的组件绑定event1事件，并且给event1事件绑定一个回调函数：doSome
     // this.$refs.user.$on('event1', this.doSome)
 
@@ -26,6 +29,9 @@ export default {
 
   },
   methods:{
+    test(name){
+      console.log(name)
+    },
     hello(){
       console.log('hello vue!')
     },

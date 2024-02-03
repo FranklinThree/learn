@@ -1,7 +1,8 @@
 <script>
-
+import Vip from "@/components/Vip.vue";
 export default {
   name: "User",
+  components : {Vip},
   data() {
     return {
       name: '张三',
@@ -43,6 +44,8 @@ export default {
     <button @click="triggerEvent2">触发event2事件</button>
     <button @click="unbinding">解绑事件</button>
     <button @click="goodbye">再见</button>
+
+    <Vip></Vip>
   </div>
 </template>
 
