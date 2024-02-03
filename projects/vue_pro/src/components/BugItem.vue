@@ -3,16 +3,15 @@ export default {
   name: "BugItem",
   props: [
     'bug',
-    'modifyResolvedCallback',
-    'deleteByIdCallback',
-    'updateDescCallback'
   ],
   methods: {
     modifyResolved(bugId){
-      this.modifyResolvedCallback(bugId)
+      // 触发事件
+      this.$bus.$emit('modifyResolvedCallback', bugId)
     },
     deleteById(bugId){
-      this.deleteByIdCallback(bugId)
+      // 触发事件
+      this.$bus.$emit('deleteByIdCallback', bugId)
     },
     // 进入编辑状态
     enterEdit(bug){
@@ -40,7 +39,8 @@ export default {
       let newDesc = e.target.value.trim()
       if(!newDesc) return
       // 更新描述信息
-      this.updateDescCallback(bug.id, newDesc)
+      // 触发事件
+      this.$bus.$emit('updateDescCallback', bug.id, newDesc)
       // 显示input框，隐藏span
       bug.editState = false
     }

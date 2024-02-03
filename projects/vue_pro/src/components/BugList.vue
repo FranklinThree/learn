@@ -6,10 +6,8 @@ export default {
   components: {BugItem},
   props: [
       'bugList',
-      'modifyResolvedCallback',
-      'deleteByIdCallback',
       'selectAllCallback',
-      'updateDescCallback'
+
   ],
   computed:{
     resolvedCount(){
@@ -61,9 +59,6 @@ export default {
       </thead>
       <tbody>
         <bug-item v-for="bug of bugList" :key="bug.id" :bug="bug" 
-          :modifyResolvedCallback="modifyResolvedCallback" 
-          :deleteByIdCallback="deleteByIdCallback" 
-          :updateDescCallback="updateDescCallback" 
         />
 
       </tbody>

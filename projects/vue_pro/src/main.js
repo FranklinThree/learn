@@ -4,10 +4,16 @@ import Vue from 'vue'
 import App from './App.vue'
 
 
+Vue.config.productionTip = false
+
 // 创建Vue实例
 new Vue({
   el: '#app',
 
-  render:h => h(App)
+  render:h => h(App),
+  beforeCreate(){
+    // 安装全局事件总线
+    Vue.prototype.$bus = this
+  }
 
 })

@@ -20,6 +20,16 @@ export default {
       ]
     }
   },
+  mounted(){
+    // 向全局事件总线对象上绑定事件
+    this.$bus.$on('modifyResolvedCallback', this.modifyResolvedCallback)
+    this.$bus.$on('deleteByIdCallback', this.deleteByIdCallback)
+    this.$bus.$on('updateDescCallback', this.updateDescCallback)
+
+  },
+  beforeDestroy() {
+    this.$bus.$off(['modifyResolvedCallback', 'deleteByIdCallback', 'updateDescCallback'])
+  },
   methods: {
     // 保存bug对象的回调方法
     saveBugCallback(bug){
@@ -68,10 +78,7 @@ export default {
   <div>
     <bug-header @saveBugCallback="saveBugCallback"></bug-header>
     <bug-list :bugList="bugList" 
-      :modifyResolvedCallback="modifyResolvedCallback" 
-      :deleteByIdCallback="deleteByIdCallback" 
       @selectAllCallback="selectAllCallback" 
-      :updateDescCallback="updateDescCallback" 
     />
     <bug-footer :bugList="bugList" 
       @clearResolvedCallback="clearResolvedCallback"></bug-footer>
