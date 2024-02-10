@@ -1,7 +1,7 @@
 const http = require('http');
 
 const server = http.createServer((req, res) => {
-  if (req.url === '/localhost/vue/bugs') {
+  if (req.url === '/vue/bugs') {
     const bugs = [
       { id: "001", desc: "222行出现空指针异常", resolved: false },
       { id: "002", desc: "666行出现类型转换异常", resolved: false },

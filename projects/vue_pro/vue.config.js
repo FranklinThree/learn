@@ -7,5 +7,9 @@ module.exports = defineConfig({
     index: {
       entry: 'src/main.js',
     }
+  },
+  devServer: {
+    // 注意：这个地址就写到端口号位置即可。后面具体的路径不需要写。
+    proxy: 'http://localhost:8000'
   }
 })

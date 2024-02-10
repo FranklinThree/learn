@@ -1,7 +1,7 @@
 const http = require('http');
 
 const server = http.createServer((req, res) => {
-  if (req.url === '/localhost/vue/users') {
+  if (req.url === '/vue/users') {
     const users = [
       { id: "001", name: '张三', age:20 },
       { id: "002", name: '李四', age:21 },
